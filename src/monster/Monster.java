@@ -7,4 +7,7 @@ public interface Monster {
     String generateChatLine();
     void readTextFile(File file);
     void generateTextFile(File file);
+
+    int countWords();
+    int countGrams();
 }

@@ -3,12 +3,6 @@ package monster;
 import java.util.*;
 
 public class MarkovGen {
-   /*private class GenData
-    {
-        int             prefixIndex;
-
-    }*/
-
     public void         appendChains(Pool pool, String[] newWords, int prefixSize)
     {
         // łączymy nowe stringi ze starymi łańcuchami
@@ -60,6 +54,15 @@ public class MarkovGen {
 
         // Nie mamy zadnych łańcudhów, odpowiadamy losowym słowem
         return pool.getList().get(rand.nextInt(pool.getSize()));
+    }
+
+    public int getSize()
+    {
+        int n = 0;
+        for ( Map.Entry<List<String>, List<String>> l : chainsMap.entrySet() )
+            n += l.getValue().size();
+
+        return n;
     }
 
     // Multimapa prefix-suffixy

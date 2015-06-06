@@ -17,6 +17,8 @@ public class GUI {
     private JButton zobaczSłownikButton;
     private JTextArea textArea1;
 
+    static JFrame frame = new JFrame("Markov Monster Chat");
+
     static final Monster markovMonster = new MarkovMonster();
 
     public GUI() {
@@ -39,10 +41,22 @@ public class GUI {
                 markovMonster.readChatLine(response);
             }
         });
+        zobaczSłownikButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame      statFrame = new JFrame("Statystyki");
+
+                statFrame.setContentPane(new Stats().STAT);
+                statFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                statFrame.pack();
+                statFrame.setVisible(true);
+
+
+            }
+        });
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Markov Monster Chat");
         frame.setContentPane(new GUI().GUI);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(new TopBar().getMenuBar());

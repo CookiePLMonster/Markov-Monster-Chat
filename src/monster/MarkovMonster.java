@@ -41,10 +41,6 @@ public class MarkovMonster implements Monster {
         }
     }
 
-    void generateStats() {
-
-    }
-
     @Override
     public void readChatLine(String line) {
         // Dostawiamy kropkę, jesli wiadomość się na niej nie kończy
@@ -86,7 +82,19 @@ public class MarkovMonster implements Monster {
         return response.toString();
     }
 
-    private int prefixSize = 2;   // Temp
+    @Override
+    public int countWords()
+    {
+        return wordsPool.getSize();
+    }
+
+    @Override
+    public int countGrams()
+    {
+        return chains.getSize();
+    }
+
+    private int prefixSize = 1;   // Temp
 
     private Pool wordsPool = new Pool();
     private MarkovGen chains = new MarkovGen();
