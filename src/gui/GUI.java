@@ -1,6 +1,6 @@
 package gui;
 
-import com.sun.javaws.exceptions.ExitException;
+import monster.MarkovMonster;
 import monster.Monster;
 
 import javax.swing.*;
@@ -13,12 +13,12 @@ import java.awt.event.ActionListener;
 public class GUI {
     private JButton wyślijButton;
     private JPanel GUI;
-    private JTextPane xXxXxJaTextPane;
+    private JEditorPane xXxXxJaTextPane;
     private JTextField nGramówWPamięciTextField;
     private JButton zobaczSłownikButton;
     private JTextArea textArea1;
 
-    private final Monster markovMonster = new Monster();
+    private final Monster markovMonster = new MarkovMonster();
 
     public GUI() {
         wyślijButton.addActionListener(new ActionListener() {
@@ -26,6 +26,14 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(textArea1.getText()); // Debug
                 markovMonster.readChatLine(textArea1.getText());
+                GUIFormat.putUserLine(xXxXxJaTextPane, textArea1.getText());
+
+                textArea1.setText(null);
+
+                // Odpowiedź
+                // TODO: ładniej?
+                String  response = markovMonster.generateChatLine();
+                GUIFormat.putBotLine(xXxXxJaTextPane, response);
             }
         });
     }

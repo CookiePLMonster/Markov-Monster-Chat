@@ -43,6 +43,25 @@ public class MarkovGen {
         }
     }
 
+    public String generateSuffix(Pool pool, List<String> prefix)
+    {
+        Random      rand = new Random();
+        if ( chainsMap.size() > 0 ) {
+            if (chainsMap.containsKey(prefix)) {
+                List<String> suffixes = chainsMap.get(prefix);
+                return suffixes.get(rand.nextInt(suffixes.size()));
+            }
+
+            // Losujemy całkowicie losowy suffix
+            Object[] suffixes = chainsMap.values().toArray();
+            List<String>    randSuffix =  (List<String>)suffixes[rand.nextInt(suffixes.length)];
+            return randSuffix.get(rand.nextInt(randSuffix.size()));
+        }
+
+        // Nie mamy zadnych łańcudhów, odpowiadamy losowym słowem
+        return pool.getList().get(rand.nextInt(pool.getSize()));
+    }
+
     // Multimapa prefix-suffixy
     Map<List<String>, List<String>> chainsMap = new HashMap();
 }
