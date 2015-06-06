@@ -14,7 +14,6 @@ public class GUI {
     private JButton wyślijButton;
     private JPanel GUI;
     private JEditorPane xXxXxJaTextPane;
-    private JTextField nGramówWPamięciTextField;
     private JButton zobaczSłownikButton;
     private JTextArea textArea1;
 
