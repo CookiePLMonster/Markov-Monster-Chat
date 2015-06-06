@@ -1,6 +1,8 @@
-package UI;
+package gui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Adrian on 2015-05-04.
@@ -23,6 +25,13 @@ public class TopBar {
         fileMenu.add(new JSeparator());
 
         JMenuItem   quitItem = new JMenuItem("Wyjdź...");
+        quitItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Program terminated on request");
+                System.exit(0);
+            }
+        });
         fileMenu.add(quitItem);
 
 
