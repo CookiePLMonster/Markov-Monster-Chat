@@ -7,46 +7,42 @@ public class Monster {
         MODE_TEXT
     }
 
-    private MonsterMode     mode;
-    private int             gramSize;
+    private MonsterMode mode;
+    private int prefixSize = 1;   // Temp
 
-    private Pool            wordsPool = new Pool();
-    private MarkovGen       chains = new MarkovGen();
+    private Pool wordsPool = new Pool();
+    private MarkovGen chains = new MarkovGen();
 
-    public void             readTextFiles ( String [] fileNames )
-    {
-
-    }
-
-    void generateStats ()
-    {
+    public void readTextFiles(String[] fileNames) {
 
     }
 
-    public void readDictionaryFiles(String[] fileNames)
-    {
-
-    }
-    public void generateDictionaryFile(String fileName)
-    {
+    void generateStats() {
 
     }
 
-    public void readChatLine(String line)
-    {
-        String[]    words = line.split("\\s");
-        int         curWord = wordsPool.getSize();
-        for ( int i = 0; i < words.length; i++ ) {
-            if ( !words[i].isEmpty() )
-                wordsPool.insertWord(words[i]);
-        }
+    public void readDictionaryFiles(String[] fileNames) {
+
+    }
+
+    public void generateDictionaryFile(String fileName) {
+
+    }
+
+    public void readChatLine(String line) {
+        String[] words = line.split("\\s");
 
         // Konstruujemy łańcuchy
-        chains.appendChains(wordsPool, words);
+        chains.appendChains(wordsPool, words, prefixSize);
+
+        //int         curWord = wordsPool.getSize();
+        for (String i : words) {
+            if (!i.isEmpty())
+                wordsPool.insertWord(i);
+        }
     }
 
-    public String generateNextChatLine()
-    {
+    public String generateNextChatLine() {
 
         // TODO: DO
         return "";
