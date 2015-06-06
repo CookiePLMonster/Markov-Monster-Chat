@@ -47,6 +47,10 @@ public class MarkovMonster implements Monster {
 
     @Override
     public void readChatLine(String line) {
+        // Dostawiamy kropkę, jesli wiadomość się na niej nie kończy
+        if ( !line.endsWith(".") && !line.endsWith("!") && !line.endsWith("?") )
+            line = line.concat(".");
+
         String[] words = line.split("\\s");
 
         // Konstruujemy łańcuchy
