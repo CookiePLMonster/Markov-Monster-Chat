@@ -5,6 +5,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import java.io.File;
+import java.util.Calendar;
 
 /**
  * Created by Adrian on 2015-06-06.
@@ -14,7 +15,8 @@ public class GUILogic {
     {
         Document doc = where.getDocument();
         try {
-            doc.insertString(doc.getLength(), line  + "\n", null);
+            doc.insertString(doc.getLength(),
+                    getTimeStamp() + " Ja: " + line  + "\n", null);
         } catch (BadLocationException e1) {
             e1.printStackTrace();
         }
@@ -24,7 +26,8 @@ public class GUILogic {
     {
         Document doc = where.getDocument();
         try {
-            doc.insertString(doc.getLength(), line  + "\n", null);
+            doc.insertString(doc.getLength(),
+                    getTimeStamp() + " Monster: " + line  + "\n", null);
         } catch (BadLocationException e1) {
             e1.printStackTrace();
         }
@@ -58,5 +61,14 @@ public class GUILogic {
         }
 
         return null;
+    }
+
+    private static String getTimeStamp()
+    {
+        Calendar rightNow = Calendar.getInstance();
+
+        return "(" + String.format("%02d", rightNow.get(Calendar.HOUR_OF_DAY)) +
+                ":" + String.format("%02d", rightNow.get(Calendar.MINUTE)) +
+                ":" + String.format("%02d", rightNow.get(Calendar.SECOND)) + ")";
     }
 }
