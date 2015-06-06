@@ -43,9 +43,18 @@ public class MarkovMonster implements Monster {
         for ( int i = -prefixSize; i < 0; i++  )
             prefix.add(wordsPool.getList().get(tmpListSize + i));
 
-        String  response = chains.generateSuffix(wordsPool, prefix);
+        StringBuilder       response = new StringBuilder();
 
-        return response;
+        // Generujemy odpowiedź składając suffixy do końca 'zdania'
+        while ( response.lastIndexOf(".") == -1 && response.lastIndexOf("?") == -1 && response.lastIndexOf("!") == -1 ) {
+            String      suffix = chains.generateSuffix(wordsPool, prefix);
+            response.append(suffix + " ");
+
+            // Modyfikujemy prefix
+            prefix.remove(0);
+            prefix.add(suffix);
+        }
+        return response.toString();
     }
 
     private int prefixSize = 1;   // Temp

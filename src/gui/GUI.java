@@ -34,6 +34,10 @@ public class GUI {
                 // TODO: ładniej?
                 String  response = markovMonster.generateChatLine();
                 GUIFormat.putBotLine(xXxXxJaTextPane, response);
+
+                // Niech bot uczy się też z własnych odpowiedzi
+                // Dzięki temu załapie to, co użytkownik mu odpisuje
+                markovMonster.readChatLine(response);
             }
         });
     }
