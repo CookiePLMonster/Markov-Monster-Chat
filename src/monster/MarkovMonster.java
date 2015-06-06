@@ -1,22 +1,47 @@
 package monster;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarkovMonster implements Monster {
-    public void readTextFiles(String[] fileNames) {
 
+    @Override
+    public void readTextFile(File file) {
+        try {
+            BufferedReader  reader = new BufferedReader( new FileReader(file));
+
+            // Czytamy plik słowo po słowie
+            String      line;
+            while ( (line = reader.readLine()) != null ) {
+                System.out.println(line);   // Debug
+                readChatLine(line);
+            }
+
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch ( IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void generateTextFile(File file)
+    {
+        try {
+            FileWriter writer = new FileWriter(file);
+
+            for ( String s : wordsPool.getList() )
+                writer.append(s + " ");
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void generateStats() {
-
-    }
-
-    public void readDictionaryFiles(String[] fileNames) {
-
-    }
-
-    public void generateDictionaryFile(String fileName) {
 
     }
 
@@ -40,7 +65,7 @@ public class MarkovMonster implements Monster {
         List<String> prefix = new ArrayList();
         int         tmpListSize = wordsPool.getSize();
 
-        for ( int i = -prefixSize; i < 0; i++  )
+        for ( int i = -Math.min(prefixSize, tmpListSize); i < 0; i++  )
             prefix.add(wordsPool.getList().get(tmpListSize + i));
 
         StringBuilder       response = new StringBuilder();
@@ -57,7 +82,7 @@ public class MarkovMonster implements Monster {
         return response.toString();
     }
 
-    private int prefixSize = 1;   // Temp
+    private int prefixSize = 2;   // Temp
 
     private Pool wordsPool = new Pool();
     private MarkovGen chains = new MarkovGen();

@@ -18,7 +18,7 @@ public class GUI {
     private JButton zobaczSłownikButton;
     private JTextArea textArea1;
 
-    private final Monster markovMonster = new MarkovMonster();
+    static final Monster markovMonster = new MarkovMonster();
 
     public GUI() {
         wyślijButton.addActionListener(new ActionListener() {
@@ -26,14 +26,14 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(textArea1.getText()); // Debug
                 markovMonster.readChatLine(textArea1.getText());
-                GUIFormat.putUserLine(xXxXxJaTextPane, textArea1.getText());
+                GUILogic.putUserLine(xXxXxJaTextPane, textArea1.getText());
 
                 textArea1.setText(null);
 
                 // Odpowiedź
                 // TODO: ładniej?
                 String  response = markovMonster.generateChatLine();
-                GUIFormat.putBotLine(xXxXxJaTextPane, response);
+                GUILogic.putBotLine(xXxXxJaTextPane, response);
 
                 // Niech bot uczy się też z własnych odpowiedzi
                 // Dzięki temu załapie to, co użytkownik mu odpisuje

@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by Adrian on 2015-05-04.
@@ -17,9 +18,34 @@ public class TopBar {
         menuBar.add(fileMenu);
 
         JMenuItem   importItem = new JMenuItem("Importuj...");
+        importItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file = GUILogic.importDialog();
+
+                if ( file != null ) {
+                    GUI.markovMonster.readTextFile(file);
+                    System.out.println("Finished reading file!"); // Debug
+                }
+            }
+        });
+
         fileMenu.add(importItem);
 
         JMenuItem   exportItem = new JMenuItem("Eksportuj...");
+        exportItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file = GUILogic.exportDialog();
+
+                if ( file != null ) {
+                    GUI.markovMonster.generateTextFile(file);
+                    System.out.println("Finished writing file!"); // Debug
+                }
+            }
+        });
+
+
         fileMenu.add(exportItem);
 
         fileMenu.add(new JSeparator());
