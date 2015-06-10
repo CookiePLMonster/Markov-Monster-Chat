@@ -6,6 +6,9 @@ import monster.Monster;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 /**
  * Created by Adrian on 2015-05-04.
@@ -58,9 +61,36 @@ public class GUI {
 
     public static void main(String[] args) {
         frame.setContentPane(new GUI().GUI);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setJMenuBar(new TopBar().getMenuBar());
         frame.pack();
         frame.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                String  opcje[] = { "Tak", "Nie", "Wróć" };
+
+                int result = JOptionPane.showOptionDialog(null,
+                        "Czy chcesz zapisać słownik przed wyjściem?", "Markov Monster Chat",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null,
+                        opcje, opcje[0]);
+
+                switch ( result )
+                {
+                    case 0:
+                        File file = GUILogic.exportDialog();
+
+                        if ( file != null ) {
+                            markovMonster.generateTextFile(file);
+                            System.out.println("Finished writing file!"); // Debug
+                        }
+
+                    case 1:
+                        System.exit(0);
+                        break;
+                }
+            }
+        });
     }
 }
