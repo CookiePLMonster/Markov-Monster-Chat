@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MarkovMonsterChat:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MarkovMonsterChat_jar</output-path>
+    <root id="archive" name="MarkovMonsterChat.jar">
+      <element id="module-output" name="MarkovMonsterChat" />
+    </root>
+  </artifact>
+</component>
