@@ -65,6 +65,21 @@ public class TopBar {
         menuBar.add(sets);
 
         JMenuItem   gram = new JMenuItem("Długość n-gramu...");
+        gram.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String strGram = JOptionPane.showInputDialog("Podaj długość n-gramu: ");
+
+                int gramLength = Integer.parseInt(strGram);
+
+                if ( gramLength < 2 )
+                    gramLength = 2;
+                else if ( gramLength > 8 )
+                    gramLength = 8;
+
+
+            }
+        });
         sets.add(gram);
 
 

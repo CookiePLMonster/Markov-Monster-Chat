@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MarkovMonster implements Monster {
+    @Override
+    public void setGramSize(int size)
+    {
+        prefixSize = size - 1;
+    }
+
 
     @Override
     public void readTextFile(String filePath) {
