@@ -1,11 +1,10 @@
-package monster;
-
 import junit.framework.TestCase;
+import monster.Pool;
 
 import java.util.List;
 
 public class PoolTest extends TestCase {
-    private Pool    pool;
+    private Pool pool;
 
     public void setUp() throws Exception {
         super.setUp();
