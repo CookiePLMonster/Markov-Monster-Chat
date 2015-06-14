@@ -1,15 +1,17 @@
 package monster;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarkovMonster implements Monster {
 
     @Override
-    public void readTextFile(File file) {
+    public void readTextFile(String filePath) {
         try {
-            BufferedReader  reader = new BufferedReader( new FileReader(file));
+            Charset charset = Charset.forName("UTF-8");
+            BufferedReader  reader = new BufferedReader( new InputStreamReader(new FileInputStream(filePath), charset));
 
             // Czytamy plik słowo po słowie
             String      line;

@@ -24,7 +24,7 @@ public class TopBar {
                 File file = GUILogic.importDialog();
 
                 if ( file != null ) {
-                    GUI.markovMonster.readTextFile(file);
+                    GUI.markovMonster.readTextFile(file.getPath());
                     System.out.println("Finished reading file!"); // Debug
                 }
             }
